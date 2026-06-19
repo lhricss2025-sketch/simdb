@@ -231,13 +231,11 @@ db = Database()
 def fetch_pakistan_data(query):
     """Fetch from Pakistan API"""
     try:
-        # Build URL - query can be number or CNIC
         url = f"https://sim-info-api.wasif-ali.workers.dev/?search={query}"
         response = requests.get(url, timeout=10)
         
         if response.status_code == 200:
             data = response.json()
-            # Handle different response formats
             if isinstance(data, dict):
                 return data, "primary"
             elif isinstance(data, list) and len(data) > 0:
@@ -628,6 +626,7 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # ============ MAIN ============
 def main():
+    # FIX: Use the correct method for building the application
     app = Application.builder().token(BOT_TOKEN).build()
     
     # User commands
